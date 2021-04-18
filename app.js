@@ -28,6 +28,15 @@ app.use((req, res, next) => {
 app.use('/api/users', usersRoutes);
 app.use('/api/places', placesRoutes);
 
+
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/build'));
+    
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname , 'frontend', 'build', 'index.html'));
+    });
+}
+
 // error handling for unsupported routes
 app.use((req, res, next) => {
     const error = new HttpError('Could not find this route' + process.env.NODE_ENV, 404);
@@ -49,15 +58,7 @@ app.use((error, req, res, next) => {
 
 });
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('frontend/build'));
-    
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname , 'frontend', 'build', 'index.html'));
-    });
-}
-
-// const url = 'mongodb+srv://leon:leon@cluster0.woatc.mongodb.net/mern?retryWrites=true&w=majority';
+// const url = 'mongodb+srv://leon:leon@cluster0.woatc.mongodb.net/mern?retryWrites=true&w=majority';;
 const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.woatc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const PORT = process.env.PORT || 5000;
