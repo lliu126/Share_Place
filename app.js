@@ -61,7 +61,7 @@ app.use((error, req, res, next) => {
 const url = 'mongodb+srv://leon:leon@cluster0.woatc.mongodb.net/mern?retryWrites=true&w=majority';;
 // const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.woatc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 mongoose
     .connect(url,
