@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const HttpError = require('./models/http-error');
 const mongoose = require('mongoose');
@@ -12,6 +14,8 @@ app.use(express.json());
 // app.use(express.urlencoded({
 //   extended: true
 // }));
+
+app.use('/uploads/images', express.static(path.join('uploads','images')));
 
 // To work around block by CORS policy 
 app.use((req, res, next) => {
@@ -45,6 +49,12 @@ app.use((req, res, next) => {
 
 // runs this error handling middleware if any middleware before it yields an error
 app.use((error, req, res, next) => {
+
+    if (req.file) {
+        fs.unlink(req.file.path, (err) => {
+            console.log(err);
+        })
+    }
     // check if a response has already been sent
     if (res.headerSent) {
         return next(error);
