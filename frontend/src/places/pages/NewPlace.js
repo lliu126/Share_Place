@@ -42,7 +42,7 @@ const NewPlace = () => {
         event.preventDefault();
         try {
             await sendRequest(
-                'http://localhost:5000/api/places',
+                'https://serene-beyond-25942.herokuapp.com/api/places',
                 'POST',
                 JSON.stringify({
                     title: formState.inputs.title.value,

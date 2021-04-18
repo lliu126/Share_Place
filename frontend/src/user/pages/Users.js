@@ -16,7 +16,7 @@ const Users = () => {
         const fetchUsers = async () => {
             try {
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/users'
+                    'https://serene-beyond-25942.herokuapp.com/api/users'
                     );
             
                 setLoadedUsers(responseData.users);
