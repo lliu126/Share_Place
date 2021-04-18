@@ -17,7 +17,7 @@ const UserPlaces = () => {
         const fetchPlaces = async () => {
             try {
                 const responseData = await sendRequest(
-                    `https://serene-beyond-25942.herokuapp.com/api/places/user/${userId}`
+                    `/api/places/user/${userId}`
                 );
                 setLoadedPlaces(responseData.places);
             } catch (err) {}

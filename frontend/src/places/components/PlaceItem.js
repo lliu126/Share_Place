@@ -31,7 +31,7 @@ const PlaceItem = props => {
         setShowConfirmModal(false);
         try {
             await sendRequest(
-                `https://serene-beyond-25942.herokuapp.com/api/places/${props.id}`,
+                `/api/places/${props.id}`,
                 'DELETE'
                 );
             props.onDelete(props.id);

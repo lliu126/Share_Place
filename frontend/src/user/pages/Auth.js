@@ -64,7 +64,7 @@ const Auth = () => {
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
-                    'https://serene-beyond-25942.herokuapp.com/api/users/login', 
+                    `/api/users/login`, 
                     'POST',
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -89,7 +89,7 @@ const Auth = () => {
 
             try {
                 const responseData = await sendRequest(
-                    'https://serene-beyond-25942.herokuapp.com/api/users/signup',
+                    `/api/users/signup`,
                     'POST',
                     formData
                 );
