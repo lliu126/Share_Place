@@ -2,6 +2,7 @@ const express = require('express');
 const { check } = require('express-validator')
 
 const placesController = require('../controllers/places-controllers');
+const fileUpload = require('../middleware/file-upload');
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.get('/user/:uid', placesController.getPlacesByUserId)
 // doing this does not return error
 router.post(
     '/', 
+    fileUpload.single('image'),
     [
         check('title')
             .not()

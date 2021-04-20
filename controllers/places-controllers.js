@@ -1,6 +1,7 @@
+const fs = require('fs');
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-
+const path = require('path');
 const HttpError = require('../models/http-error');
 const getCoordsForAddress = require('../util/location');
 const Place = require('../models/place');
@@ -84,7 +85,7 @@ const createPlace = async (req, res, next) => {
         description,
         address,
         location: coordinates,
-        image: 'https://imgs.6sqft.com/wp-content/uploads/2014/07/21041607/NYC_Empire_State_Building.jpg',
+        image: req.file.path,
         creator
       });
 
@@ -192,6 +193,8 @@ const deletePlaceById = async (req, res, next) => {
        );
        return next(error);
    }
+   
+   const imagePath = place.image
 
    try {
 
@@ -209,6 +212,10 @@ const deletePlaceById = async (req, res, next) => {
         );
         return next(error);
    }
+
+   fs.unlink(imagePath, err => {
+       console.log(err);
+   })
 
     res.status(200).json({message: 'Delete successful'})
 };

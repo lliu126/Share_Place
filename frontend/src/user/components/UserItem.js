@@ -10,7 +10,8 @@ return (
         <Card className="user-item__content">
             <Link to={`/${props.id}/places`}>
             <div className="user-item__image">
-                <Avatar image={`https://serene-beyond-25942.herokuapp.com/${props.image}`} alt={props.name} />
+                {/* <Avatar image={`https://serene-beyond-25942.herokuapp.com/${props.image}`} alt={props.name} /> */}
+                <Avatar image={`/${props.image}`} alt={props.name} />
             </div>
             <div className="user-item__info">
                 <h2>{props.name}</h2>
